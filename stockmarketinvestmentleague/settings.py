@@ -152,3 +152,7 @@ STATICFILES_FINDERS = [
 
 # CUSTOM USER MODEL
 AUTH_USER_MODEL = 'stockmarketinvleague.User'
+
+
+# API KEYS
+IEXCLOUD_API = os.environ.get('IEXCLOUD_API')

@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="row w-100 h-100 align-content-center justify-content-center">
+  <div class="row align-content-center justify-content-center">
+    <div class="active-pink-3 active-pink-4 mb-4">
+      <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+    </div>
+  </div>
+  <div class="row w-100 h-96 align-content-center justify-content-center">
+
     <div class="w-20 ml-1 mr-5">
+{#      <a class="btn btn-blue" href="{% url 'get_data' %}">GET DATA</a>#}
       <table class="table table-striped">
         <thead>
           <tr>
@@ -13,27 +20,27 @@
         </thead>
         <tbody>
           <tr>
-            <td>Mark</td>
+            <td>1</td>
             <td>Otto</td>
             <td>@mdo</td>
           </tr>
           <tr>
-            <td>Mark</td>
+            <td>2</td>
             <td>Otto</td>
             <td>@mdo</td>
           </tr>
           <tr>
-            <td>Mark</td>
+            <td>3</td>
             <td>Otto</td>
             <td>@mdo</td>
           </tr>
           <tr>
-            <td>Mark</td>
+            <td>4</td>
             <td>Otto</td>
             <td>@mdo</td>
           </tr>
           <tr>
-            <td>Mark</td>
+            <td>5</td>
             <td>Otto</td>
             <td>@mdo</td>
           </tr>
@@ -41,10 +48,12 @@
       </table>
     </div>
     <div class="w-75">
-      <table class="table table-striped">
+
+      <table class="table table-striped w-auto">
         <thead>
           <tr>
             <th scope="col">Security</th>
+            <th scope="col">Industry</th>
             <th scope="col">Price</th>
             <th scope="col">Quantity</th>
             <th scope="col">Cost</th>
@@ -53,54 +62,17 @@
           </tr>
         </thead>
         <tbody>
+        {% for comp in object_list %}
           <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
+            <td>{{ comp.companyName  }} ({{ comp.symbol }})</td>
+            <td>{{ comp.industry }}</td>
+            <td>${{ comp.price }}</td>
+            <td>$16</td>
+            <td>$12</td>
+            <td>$14</td>
+            <td>$11</td>
           </tr>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
+        {% endfor %}
         </tbody>
       </table>
     </div>

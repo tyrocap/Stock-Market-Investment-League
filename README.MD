@@ -4,7 +4,7 @@
 - [x] Basic Home Page
 - [x] Authentication
 - [x] Database
-- [ ] Custom User
+- [x] Custom User
 - [ ] Data
 - [ ] Search
 - [ ] Create/Read/Update/Delete

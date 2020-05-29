@@ -8,7 +8,7 @@ from stockmarketinvestmentleague.settings import IEXCLOUD_API
 
 class homeView(ListView):
   model = Company
-  paginate_by = 8
+  paginate_by = 7
   template_name = 'home.html'
 
 

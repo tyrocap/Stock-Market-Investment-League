@@ -21,7 +21,7 @@
 <body>
 
   <!--Navbar -->
-  <nav class="mb-1 navbar navbar-expand-lg navbar-dark stylish-color-dark">
+  <nav class="mb-1 navbar navbar-expand-lg navbar-dark stylish-color-dark" style="min-height: 50px">
       <a class="navbar-brand" href="#">StomariL</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
         aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,7 @@
   <!--/.Messages -->
 
   <!-- Start your project here-->  
-  <div style="height: 84vh">
+  <div style="min-height: calc(96.5vh - 50px - 40px)">
     <div class="flex-center flex-column">
     {% block content %}
     {% endblock content %}
@@ -97,14 +97,12 @@
   <!-- End your project here-->
 
   <!-- Footer -->
-  <footer class="page-footer font-small stylish-color-dark">
-
+  <footer class="page-footer font-small stylish-color-dark" style="min-height: 40px">
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2020 Copyright:
       <a href="https://mdbootstrap.com/"> Adkhamjon Soliev</a>
     </div>
     <!-- Copyright -->
-
   </footer>
 <!-- Footer -->
   {% block script %}

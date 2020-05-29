@@ -21,7 +21,7 @@
 <body>
 
   <!--Navbar -->
-  <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+  <nav class="mb-1 navbar navbar-expand-lg navbar-dark stylish-color-dark">
       <a class="navbar-brand" href="#">Navbar</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
         aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,7 +97,7 @@
   <!-- End your project here-->
 
   <!-- Footer -->
-  <footer class="page-footer font-small blue">
+  <footer class="page-footer font-small stylish-color-dark">
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2020 Copyright:
@@ -107,7 +107,8 @@
 
   </footer>
 <!-- Footer -->
-
+  {% block script %}
+  {% endblock script %}
   <!-- jQuery -->
   <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
   <!-- Bootstrap tooltips -->

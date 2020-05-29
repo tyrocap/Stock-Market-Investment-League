@@ -5,13 +5,18 @@
 - [x] Authentication
 - [x] Database
 - [x] Custom User
-- [ ] Data
-- [ ] Search
+- [x] Data
+- [x] Search
+- [x] Filtering JavaScript
+- [x] Modals
 - [ ] Create/Read/Update/Delete
 
-- Built an application that allows investor players to make virtual
- investments in real-world stocks 
-- Designed a dashboard using HTML/CSS/jQuery for monitoring supporting
- operations and league activities
-- Developed a Flask/SQLite backend that provides account management and
- transaction archiving services
+- Progress so far...
+- HOME PAGE
+![alt text](screenshots/homepage.PNG)
+
+- MODAL 
+![alt text](screenshots/Modal.PNG)
+
+- FILTER
+![alt text](screenshots/Filter.PNG)

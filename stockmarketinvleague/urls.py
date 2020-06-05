@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import homeView, get_data
+from .views import homeView, get_data, search
 
 urlpatterns = [
     path('', homeView.as_view(), name='home_view'),
     path('get_data/', get_data, name='get_data'),
+    path('search/', search, name='search'),
 ]

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 {% load static %}
 
 <html lang="en">
@@ -105,9 +105,7 @@
     <!-- Copyright -->
   </footer>
 <!-- Footer -->
-  {% block script %}
-  {% endblock script %}
-  <!-- jQuery -->
+    <!-- jQuery -->
   <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
   <!-- Bootstrap tooltips -->
   <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
@@ -117,6 +115,8 @@
   <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
   <!-- Your custom scripts (optional) -->
   <script type="text/javascript"></script>
+  {% block script %}
+  {% endblock script %}
 
 </body>
 </html>

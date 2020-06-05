@@ -1,16 +1,59 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="row align-content-center justify-content-end mt-3">
-    <div class="active-blue-3 active-blue-4 mb-3">
-      <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+  <div class="row w-100 flex-row align-content-center justify-content-center">
+    <div class="w-50 mt-3">
+      <form method="get" id="searchbarform" action="{% url 'search' %}">
+        <input id="searchbar" class="form-control" type="text" placeholder="Search"
+           aria-label="Search" name="searchbar">
+      </form>
     </div>
   </div>
-  <div class="row w-100 h-96 align-content-center justify-content-center">
+
+
+  <!-- Modal: modalCart -->
+  <div class="modal fade" id="modalSearch" tabindex="-2" role="dialog"
+       aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <!--Header-->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <!--Body-->
+        <div class="modal-body">
+                    <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Company name</th>
+                <th>Market Cap</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody id="tbody_modal">
+            </tbody>
+          </table>
+
+        </div>
+        <!--Footer-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+          <button class="btn btn-primary">Checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal: modalCart -->
+
+  <div class="row w-100 flex-row align-content-center justify-content-center">
 
     <div class="w-20 ml-1 mr-5">
 {#      <a class="btn btn-blue" href="{% url 'get_data' %}">GET DATA</a>#}
-      <table class="table table-striped">
+      <table class="table table-striped w-auto">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -125,6 +168,7 @@
         {% endfor %}
         </tbody>
       </table>
+
     </div>
   </div>
 
@@ -133,6 +177,33 @@
 {% block script %}
   <!--When a header is clicked, run the sortTable function, with a parameter,
   0 for sorting by names, 1 for sorting by country: -->
+
+<script type="text/javascript">
+  $(document).on('submit', '#searchbarform', function(e){
+    e.preventDefault();
+    $.ajax({
+      type: 'GET',
+      url: 'search/',
+      data: {
+        'search_text': $('#searchbar').val(),
+      },
+      success: function(response) {
+        alert("The search is submitted.");
+        $('#searchbar').val('');
+
+        const comp = response['0']
+
+        const tbody_modal = $("#tbody_modal")
+        tbody_modal.append('<tr><th scope="row">'+ comp.symbol + '</th><td>'+
+          comp.companyName+ '</td><td>'+ comp.marketCap +'</td><td>$'+ comp
+          .price +'<a><i ' +
+          'class="fasfa-times"></i></a></td></tr>')
+        $('#modalSearch').modal('show');
+
+      }
+    })
+})
+</script>
 
   <script>
   function sortTable(n) {
@@ -208,4 +279,7 @@
     }
   }
   </script>
+
+
+
 {% endblock script %}

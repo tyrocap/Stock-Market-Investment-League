@@ -1,0 +1,26 @@
+# 6/4/2020
+# Create a ajax request
+# Return json object
+# Create a modal with 'show' when ajax call returns
+# Update modal content using returned json data
+# a
+# a
+# a
+# a
+# a
+# a
+# a
+# a
+# a
+# a
+# a
+# a
+# a
+# a
+# a
+# a
+# a
+# a
+# a
+# a
+# a

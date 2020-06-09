@@ -156,3 +156,8 @@ AUTH_USER_MODEL = 'stockmarketinvleague.User'
 
 # API KEYS
 IEXCLOUD_API = os.environ.get('IEXCLOUD_API')
+
+# REDIRECTS
+LOGIN_REDIRECT_URL = 'home_view'
+LOGOUT_REDIRECT_URL = 'home_view'
+SIGNUP_REDIRECT_URL = 'home_view'

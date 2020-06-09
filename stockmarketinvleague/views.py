@@ -1,10 +1,11 @@
 import requests
 import json
-from .models import Company
+from .models import Company, Profile
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.views.generic.list import ListView
 from stockmarketinvestmentleague.settings import IEXCLOUD_API
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class homeView(ListView):
@@ -12,23 +13,32 @@ class homeView(ListView):
   paginate_by = 7
   template_name = 'home.html'
 
-  def get_context_data(self, **kwargs):
-    context = super().get_context_data(**kwargs)
-    if self.request.GET:
-      ticker = self.request.GET['search_text'].upper()
-      context['modal_companies'] = Company.objects.filter(
-        symbol__contains=ticker)
-      return context
-    else:
-      return context
 
 def search(request):
   if request.method == 'GET':
     ticker = request.GET['search_text'].upper()
     modal_companies = Company.objects.filter(
       symbol__contains=ticker)
-    print(list(modal_companies.values()))
     return JsonResponse(list(modal_companies.values()), safe=False)
+
+
+def addwatchlist(request):
+  try:
+    # Get the profile connected to the user
+    # Append the ticker to the waitlist array
+    profile = Profile.objects.get(profile=request.user)
+    profile.waitlist.append(request.POST['comp_symbol'])
+    profile.save()
+  except ObjectDoesNotExist:
+    # If profile object doesnt exist yet,
+    # create one with new ticker added to the waitlist
+    profile = Profile.objects.create(profile=request.user, waitlist=[
+      request.POST['comp_symbol'], ])
+    profile.save()
+  print(request.POST['comp_symbol'])
+  print("The profile is successfully updated!")
+  return redirect('home_view')
+
 
 def get_data(request):
   if request.method == 'GET':

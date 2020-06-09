@@ -19,13 +19,16 @@
       <div class="modal-content">
         <!--Header-->
         <div class="modal-header">
+          <button class="btn-primary rounded-pill"><i class="far
+                      fa-star"></i>Add to
+                        Watchlist</button>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
         <!--Body-->
         <div class="modal-body">
-                    <table class="table table-hover">
+          <table class="table table-hover">
             <thead>
               <tr>
                 <th>Symbol</th>
@@ -41,7 +44,6 @@
         </div>
         <!--Footer-->
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
           <button class="btn btn-primary">Checkout</button>
         </div>
       </div>
@@ -128,9 +130,13 @@
                     <div class="modal-header">
                       <div id="exampleModalLongTitle">
                         <strong>{{ comp.companyName }} ({{ comp.symbol }})</strong></div>
-                      <button class="btn-primary rounded-pill"><i class="far
-                      fa-star"></i>Add to
-                        Watchlist</button>
+                      <form method="post">
+                        {% csrf_token %}
+                        <button id="addwatchlistbutton{{ comp.id }}"
+                                class="waitlistbutton" value="{{ comp.symbol }}"
+                            onclick="addwatchlist()"><i class="far
+                            fa-star"></i>Add to watchlist</button>
+                      </form>
                     </div>
                     <div class="modal-body">
                       <h5><strong>${{ comp.price }} (YTD:
@@ -178,32 +184,57 @@
   <!--When a header is clicked, run the sortTable function, with a parameter,
   0 for sorting by names, 1 for sorting by country: -->
 
-<script type="text/javascript">
-  $(document).on('submit', '#searchbarform', function(e){
-    e.preventDefault();
-    $.ajax({
-      type: 'GET',
-      url: 'search/',
-      data: {
-        'search_text': $('#searchbar').val(),
-      },
-      success: function(response) {
-        alert("The search is submitted.");
-        $('#searchbar').val('');
+  <script type="text/javascript">
+    $(document).on('submit', '#searchbarform', function(e){
+      e.preventDefault();
+      $.ajax({
+        type: 'GET',
+        url: 'search/',
+        data: {
+          'search_text': $('#searchbar').val(),
+        },
+        success: function(response) {
+          alert("The search is submitted.");
+          $('#searchbar').val('');
 
-        const comp = response['0']
+          const comp = response['0']
 
-        const tbody_modal = $("#tbody_modal")
-        tbody_modal.append('<tr><th scope="row">'+ comp.symbol + '</th><td>'+
-          comp.companyName+ '</td><td>'+ comp.marketCap +'</td><td>$'+ comp
-          .price +'<a><i ' +
-          'class="fasfa-times"></i></a></td></tr>')
-        $('#modalSearch').modal('show');
+          const tbody_modal = $("#tbody_modal")
+          tbody_modal.append('<tr><th scope="row">'+ comp.symbol + '</th><td>'+
+            comp.companyName+ '</td><td>'+ comp.marketCap +'</td><td>$'+ comp
+            .price +'<a><i ' +
+            'class="fasfa-times"></i></a></td></tr>')
+          $('#modalSearch').modal('show');
 
-      }
+        }
+      })
+  })
+  </script>
+
+  <script>
+    $(document).on('click', '.waitlistbutton',
+      function(e){
+      e.preventDefault();
+
+      const value = e.target.value;
+      const id = e.target.id;
+
+      $(`#${id}`).css('background-color', 'red');
+
+      $.ajax({
+        type: 'POST',
+        headers:{
+        "X-CSRFToken": $("[name=csrfmiddlewaretoken]").val()},
+        url: 'addwatchlist/',
+        data: {
+          'comp_symbol': value
+        },
+        success: function () {
+          alert("The company is added.")
+        }
+      })
     })
-})
-</script>
+  </script>
 
   <script>
   function sortTable(n) {

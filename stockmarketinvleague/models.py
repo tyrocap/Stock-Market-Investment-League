@@ -1,9 +1,8 @@
 from django.contrib.auth.models import AbstractUser
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
-from django.urls import reverse
 import uuid
-from django.contrib.auth import get_user_model
-
+from django.conf import settings
 
 class User(AbstractUser):
   pass
@@ -28,3 +27,12 @@ class Company(models.Model):
 
     def __str__(self):
         return self.symbol
+
+
+class Profile(models.Model):
+    profile = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    waitlist = ArrayField(
+            models.CharField(max_length=10, blank=True))
+
+    def __str__(self):
+        return self.profile

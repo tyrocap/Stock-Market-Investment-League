@@ -197,15 +197,16 @@
           alert("The search is submitted.");
           $('#searchbar').val('');
 
-          const comp = response['0']
-
           const tbody_modal = $("#tbody_modal")
-          tbody_modal.append('<tr><th scope="row">'+ comp.symbol + '</th><td>'+
-            comp.companyName+ '</td><td>'+ comp.marketCap +'</td><td>$'+ comp
-            .price +'<a><i ' +
-            'class="fasfa-times"></i></a></td></tr>')
+          tbody_modal.empty();
+          for(var i=0; i<response.length; i++){
+            const comp = response[`${i}`]
+            tbody_modal.append('<tr><th scope="row">'+ comp.symbol + '</th><td>'+
+              comp.companyName+ '</td><td>'+ comp.marketCap +'</td><td>$'+ comp
+              .price +'<a><i ' +
+              'class="fasfa-times"></i></a></td></tr>')
+          }
           $('#modalSearch').modal('show');
-
         }
       })
   })

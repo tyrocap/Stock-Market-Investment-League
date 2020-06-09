@@ -18,7 +18,7 @@ def search(request):
   if request.method == 'GET':
     ticker = request.GET['search_text'].upper()
     modal_companies = Company.objects.filter(
-      symbol__contains=ticker)
+      symbol__icontains=ticker)
     return JsonResponse(list(modal_companies.values()), safe=False)
 
 

@@ -9,7 +9,8 @@
 - [x] Search
 - [x] Filtering JavaScript
 - [x] Modals
-- [ ] Create/Read/Update/Delete
+- [x] Create/Read
+- [ ] Update/Delete
 
 - Progress so far...
 - HOME PAGE
@@ -18,5 +19,5 @@
 - MODAL 
 ![alt text](screenshots/Modal.PNG)
 
-- FILTER
+- SEARCH
 ![alt text](screenshots/Filter.PNG)
